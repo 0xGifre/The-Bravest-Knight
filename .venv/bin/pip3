@@ -1,4 +1,4 @@
-#!/Users/gifre/Desktop/Projects/The-Bravest-Knight/.venv/bin/python
+#!/Users/gifre/Desktop/The-Bravest-Knight/.venv/bin/python3.12
 import sys
 from pip._internal.cli.main import cli
 if __name__ == '__main__':
