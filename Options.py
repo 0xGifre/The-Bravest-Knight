@@ -12,28 +12,28 @@ class Options():
 
         self.mouse = pygame.mouse.get_pos()
 
-        self.image_button_back = pygame.image.load('images/button_back.png')
+        self.image_button_back = pygame.image.load('images/menu_objects/button_back.png')
         self.image_button_back = pygame.transform.scale(self.image_button_back, (100, 100))
 
-        self.bg_image = pygame.image.load('images/menu_bg.png')
+        self.bg_image = pygame.image.load('images/menu_objects/menu_bg.png')
         self.bg_image = pygame.transform.scale(self.bg_image, (800, 650))
 
-        self.image_sound_on = pygame.image.load('images/sound_on.png')
+        self.image_sound_on = pygame.image.load('images/menu_objects/sound_on.png')
         self.image_sound_on = pygame.transform.scale(self.image_sound_on, (100, 100))
 
-        self.image_sound_initial = pygame.image.load('images/sound_on.png')
+        self.image_sound_initial = pygame.image.load('images/menu_objects/sound_on.png')
         self.image_sound_initial = pygame.transform.scale(self.image_sound_on, (100, 100))
 
-        self.image_music_on = pygame.image.load('images/music_on.png')
+        self.image_music_on = pygame.image.load('images/menu_objects/music_on.png')
         self.image_music_on = pygame.transform.scale(self.image_music_on, (100, 150))
 
-        self.image_music_initial = pygame.image.load('images/music_on.png')
+        self.image_music_initial = pygame.image.load('images/menu_objects/music_on.png')
         self.image_music_initial = pygame.transform.scale(self.image_music_on, (100, 150))
 
-        self.image_sound_off = pygame.image.load('images/sound_off.png')
+        self.image_sound_off = pygame.image.load('images/menu_objects/sound_off.png')
         self.image_sound_off = pygame.transform.scale(self.image_sound_off, (100, 100))
 
-        self.image_music_off = pygame.image.load('images/music_off.png')
+        self.image_music_off = pygame.image.load('images/menu_objects/music_off.png')
         self.image_music_off = pygame.transform.scale(self.image_music_off, (100, 150))
 
         self.size = screen.get_size()

@@ -7,9 +7,9 @@ class Game_menu():
     def __init__(self, screen, settings):
         self.settings = settings
         self.screen = screen
-        self.bg_image = pygame.image.load('images/menu_bg.png')
+        self.bg_image = pygame.image.load('images/menu_objects/menu_bg.png')
         self.bg_image = pygame.transform.scale(self.bg_image, (800, 650)).convert()
-        self.bg_button = pygame.image.load('images/button_bg.png')
+        self.bg_button = pygame.image.load('images/menu_objects/button_bg.png')
         self.bg_button_rect = self.bg_button.get_rect()
         self.bg_button = pygame.transform.scale(self.bg_button, (385, 50)).convert_alpha()
 

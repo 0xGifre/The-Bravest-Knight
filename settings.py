@@ -22,7 +22,6 @@ class Settings:
         self.arrow_speed = 3
         self.arrow_allowed = 3
 
-        self.sound_enabled = True
         self.show_key = False
 
  #       self.npc_speed = 1

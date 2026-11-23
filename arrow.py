@@ -7,7 +7,7 @@ class Arrow(Sprite):
         super().__init__()
         self.screen = screen
         self.settings = settings
-        self.image = pygame.image.load('images/fireball/fireballDown.png')
+        self.image = pygame.image.load('images/fireballs/fireballDown.png')
         self.image = pygame.transform.scale(self.image,(14, 18)).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.centerx = main_hero.rect.centerx - 2
@@ -15,9 +15,9 @@ class Arrow(Sprite):
 
         if main_hero.last_position == 2 or main_hero.last_position == 4:
             if main_hero.last_position == 2:
-                self.image = pygame.image.load('images/fireball/fireballUp.png')
+                self.image = pygame.image.load('images/fireballs/fireballUp.png')
             else:
-                self.image = pygame.image.load('images/fireball/fireballDown.png')
+                self.image = pygame.image.load('images/fireballs/fireballDown.png')
             self.image = pygame.transform.scale(self.image, (9, 13)).convert_alpha()
             self.y_direction = -2 if main_hero.last_position == 2 else 2
         else:
@@ -25,9 +25,9 @@ class Arrow(Sprite):
 
         if main_hero.last_position == 1 or main_hero.last_position == 3:
             if main_hero.last_position == 1:
-                self.image = pygame.image.load('images/fireball/fireballLeft.png')
+                self.image = pygame.image.load('images/fireballs/fireballLeft.png')
             else:
-                self.image = pygame.image.load('images/fireball/fireballRight.png')
+                self.image = pygame.image.load('images/fireballs/fireballRight.png')
 
             self.image = pygame.transform.scale(self.image, (13, 9)).convert_alpha()
             self.x_direction = -2 if main_hero.last_position == 1 else 2

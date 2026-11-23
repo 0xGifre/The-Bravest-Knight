@@ -1,7 +1,3 @@
-from pathlib import Path
-import os
-from restored_assets import load_plot
-
 import pygame
 import game_functions as g_f
 from settings import Settings
@@ -18,10 +14,10 @@ from custom_timer import Custom_timer
 from npc_bot import Enemy
 from wizard import Wizard
 from secondWizard import MagicWizard
+from Boss import BossEnemy
 
 
 def run_game():
-    os.chdir(Path(__file__).resolve().parent)
     pygame.init()
     pygame.mixer.init()
     game_settings = Settings()
@@ -44,33 +40,38 @@ def run_game():
     wizard = Wizard(screen)
     main_hero = Main_hero(screen, game_settings)
     enemy = Enemy(screen, game_settings)
+    boss = BossEnemy(screen)
 
     """Maps or backgrounds"""
 
-    background_image1 = pygame.image.load('images/MapBackGround/map_balcon.png')
-    background_image2 = pygame.image.load('images/MapBackGround/map_hall.png')
-    background_image3 = pygame.image.load('images/MapBackGround/map_boss.png')
-    background_image4 = pygame.image.load('images/MapBackGround/game_over.png')
+    background_image1 = pygame.image.load('images/backgroundMapsAndItems/mapBackGround/map_balcon.png')
+    background_image2 = pygame.image.load('images/backgroundMapsAndItems/mapBackGround/map_hall.png')
+    background_image3 = pygame.image.load('images/backgroundMapsAndItems/mapBackGround/map_boss.png')
+    background_image4 = pygame.image.load('images/backgroundMapsAndItems/mapBackGround/game_over.png')
 
     """Details (colons, zabors.)"""
 
-    colona = pygame.image.load('images/BackGroundItems/colona.png').convert_alpha()
-    colona2 = pygame.image.load('images/BackGroundItems/colona.png').convert_alpha()
-    colona3 = pygame.image.load('images/BackGroundItems/half_colona.png').convert_alpha()
-    colona4 = pygame.image.load('images/BackGroundItems/half_colona.png').convert_alpha()
+    colona = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/colona.png').convert_alpha()
+    colona2 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/colona.png').convert_alpha()
+    colona3 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/half_colona.png').convert_alpha()
+    colona4 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/half_colona.png').convert_alpha()
 
-    zabor_1 = pygame.image.load('images/BackGroundItems/zabor.png').convert_alpha()
-    zabor_2 = pygame.image.load('images/BackGroundItems/zabor_2.png').convert_alpha()
-    zabor_3 = pygame.image.load('images/BackGroundItems/zabor_3.png').convert_alpha()
-    zabor_4 = pygame.image.load('images/BackGroundItems/zabor_4.png').convert_alpha()
-    zabor_5 = pygame.image.load('images/BackGroundItems/zabor_5.png').convert_alpha()
-    zabor_6 = pygame.image.load('images/BackGroundItems/zabor_6.png').convert_alpha()
-    zabor_7 = pygame.image.load('images/BackGroundItems/zabor_7.png').convert_alpha()
-    zabor_8 = pygame.image.load('images/BackGroundItems/zabor_8.png').convert_alpha()
-    zabor_9 = pygame.image.load('images/BackGroundItems/zabor_9.png').convert_alpha()
+    zabor_1 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor.png').convert_alpha()
+    zabor_2 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_2.png').convert_alpha()
+    zabor_3 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_3.png').convert_alpha()
+    zabor_4 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_4.png').convert_alpha()
+    zabor_5 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_5.png').convert_alpha()
+    zabor_6 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_6.png').convert_alpha()
+    zabor_7 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_7.png').convert_alpha()
+    zabor_8 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_8.png').convert_alpha()
+    zabor_9 = pygame.image.load('images/backgroundMapsAndItems/backGroundItems/zabor_9.png').convert_alpha()
 
-    secondPlot = load_plot('images/Plots/secondPlotPhoto.png', 2)
-    firstPlot = load_plot('images/Plots/firstPlotPhoto.png', 1)
+    firstPlot = pygame.image.load('images/plots/firstPlotPhoto.png').convert_alpha()
+    secondPlot = pygame.image.load('images/plots/secondPlotPhoto.png').convert_alpha()
+
+    iconWithFireBall = pygame.image.load('images/fireballs/amount/iconWithFireball.png').convert_alpha()
+    iconWithoutFireBall = pygame.image.load('images/fireballs/amount/iconWithoutFireBall.png').convert_alpha()
+
 
     background_image1 = pygame.transform.scale(background_image1, (608, 736)).convert()
     background_image2 = pygame.transform.scale(background_image2, (608, 736)).convert()
@@ -84,7 +85,7 @@ def run_game():
 
     '''Title'''
 
-    pygame.display.set_caption("Alpha and his Adventure")
+    pygame.display.set_caption("Легендарний Годвин")
     clock = pygame.time.Clock()
 
     while True:
@@ -106,14 +107,12 @@ def run_game():
             g_f.check_menu_pause_events(game_settings, pause)
 
         elif game_settings.game_start == 1 and game_settings.game_resume == 0:
-            g_f.check_events(main_hero, arrows, screen, game_settings, custom_timer, wizard, secondWizard)
+            g_f.check_events(main_hero, arrows, screen, game_settings, custom_timer)
 
             main_hero.update(pygame.sprite.spritecollide(main_hero, blocks, False), main_hero, blocks)
-            main_hero.need_reload()
-            enemy.update()
 
             arrows.update()
-
+            clock.tick_busy_loop(60)
 
 
 
@@ -122,7 +121,6 @@ def run_game():
 
             if game_settings.level == 1:
                 screen.blit(background_image1, (0, 0))
-                blocks.empty()
                 create_blocks_first_room(blocks, screen)
 
             elif game_settings.level == 2:
@@ -142,9 +140,8 @@ def run_game():
                     custom_timer.draw_timer()
 
 
-
-            #for block in blocks:
-            #    block.draw_block()
+          #  for block in blocks:
+         #       block.draw_block()
 
             for arrow in arrows:
                 if arrow.rect.bottom <= 0:
@@ -153,16 +150,14 @@ def run_game():
                     arrows.remove(arrow)
                 elif arrow.rect.left >= game_settings.screen_width:
                     arrows.remove(arrow)
-                elif arrow.rect.top >= game_settings.screen_height:
+                elif arrow.rect.top >= game_settings.screen_width:
                     arrows.remove(arrow)
             # print(main_hero.custom_timer)
 
             g_f.update_screen(screen, game_settings, main_hero, arrows, enemy, background_image1, background_image2, colona, colona2,
                               colona3,
-                              colona4, zabor_1, zabor_2, zabor_3, zabor_4, zabor_5, zabor_6, zabor_7, zabor_8, zabor_9, wizard, secondWizard, secondPlot, firstPlot)
+                              colona4, zabor_1, zabor_2, zabor_3, zabor_4, zabor_5, zabor_6, zabor_7, zabor_8, zabor_9, wizard,
+                              secondWizard, secondPlot, firstPlot, iconWithFireBall, iconWithoutFireBall, boss)
 
-        clock.tick(60)
 
-
-if __name__ == "__main__":
-    run_game()
+run_game()

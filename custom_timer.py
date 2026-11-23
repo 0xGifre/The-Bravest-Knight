@@ -11,7 +11,7 @@ class Custom_timer():
         self.size = screen.get_size()
         self.width = self.size[0]
         self.height = self.size[1]
-        self.font_title = pygame.font.Font(None, 64)
+        self.font_title = pygame.font.SysFont('Arial', 64)
 
 
 
