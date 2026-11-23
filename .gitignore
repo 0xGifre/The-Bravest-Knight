@@ -1,19 +1,6 @@
 # Virtual environments
 .venv/
-.venv312/
 venv/
-venv312/
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-
-# macOS
-.DS_Store
-
-# IDE
-.idea/
 
 # Logs
 *.log
